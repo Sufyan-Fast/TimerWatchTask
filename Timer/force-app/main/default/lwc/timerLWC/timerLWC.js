@@ -2,7 +2,7 @@ import { LightningElement } from "lwc";
 
 export default class TimerLWC extends LightningElement {
   showStartBtn = true;
-  showHoursMinutesSeconds = true;
+  showTimeInputs = true;
   showSeconds = false;
   showMinutes = false;
   showHours = false;
@@ -11,18 +11,23 @@ export default class TimerLWC extends LightningElement {
   hours = 0;
 
   handleChange(event) {
+    const EVENT_CHANGE_VALUES = {
+      SECONDS: "seconds",
+      MINUTES: "minutes",
+      HOURS: "hours"
+    };
     const field = event.target.name;
-    if (field === "seconds") {
+    if (field === EVENT_CHANGE_VALUES.SECONDS) {
       this.seconds = event.target.value;
       if (this.seconds > 0) {
         this.showSeconds = true;
       }
-    } else if (field === "minutes") {
+    } else if (field === EVENT_CHANGE_VALUES.MINUTES) {
       this.minutes = event.target.value;
       if (this.minutes > 0) {
         this.showMinutes = true;
       }
-    } else if (field === "hours") {
+    } else if (field === EVENT_CHANGE_VALUES.HOURS) {
       this.hours = event.target.value;
       if (this.hours > 0) {
         this.showHours = true;
@@ -34,7 +39,7 @@ export default class TimerLWC extends LightningElement {
 
   start(event) {
     this.showStartBtn = false;
-    this.showHoursMinutesSeconds = false;
+    this.showTimeInputs = false;
     const parentThis = this;
 
     this.timeIntervalInstance = setInterval(function () {
@@ -79,7 +84,7 @@ export default class TimerLWC extends LightningElement {
 
   stop(event) {
     this.showStartBtn = true;
-    this.showHoursMinutesSeconds = true;
+    this.showTimeInputs = true;
     clearInterval(this.timeIntervalInstance);
   }
 
@@ -87,7 +92,7 @@ export default class TimerLWC extends LightningElement {
     this.template.querySelectorAll("lightning-input").forEach((element) => {
       element.value = null;
     });
-    this.showHoursMinutesSeconds = true;
+    this.showTimeInputs = true;
     this.showStartBtn = true;
     this.showMinutes = false;
     this.showHours = false;
