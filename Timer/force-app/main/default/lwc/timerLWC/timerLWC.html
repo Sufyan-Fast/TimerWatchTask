@@ -1,0 +1,78 @@
+<template>
+  <div
+    style="
+      background: white;
+      height: 450px;
+      width: 600px;
+      padding: 40px;
+      border-radius: 10px;
+    "
+  >
+    <c-show-time-component hours={hours} minutes={minutes} seconds={seconds}>
+    </c-show-time-component>
+
+    <div style="height: 100px">
+      <template if:true={showTimeInputs}>
+        <lightning-layout vertical-align="center">
+          <lightning-layout-item size="1.5">
+            <lightning-input
+              name="hours"
+              type="number"
+              style="margin-left: 10px"
+              label="Hours"
+              placeholder="00h"
+              onchange={handleChange}
+            >
+            </lightning-input>
+          </lightning-layout-item>
+          <lightning-layout-item size="1.5">
+            <lightning-input
+              name="minutes"
+              type="number"
+              style="margin-left: 15px"
+              label="Minutes"
+              placeholder="00m"
+              onchange={handleChange}
+            >
+            </lightning-input>
+          </lightning-layout-item>
+
+          <lightning-layout-item size="1.5">
+            <lightning-input
+              name="seconds"
+              type="number"
+              style="margin-left: 15px"
+              label="Seconds  "
+              placeholder="00s"
+              onchange={handleChange}
+            >
+            </lightning-input>
+          </lightning-layout-item>
+        </lightning-layout>
+      </template>
+    </div>
+
+    <div style="height: 50px">
+      <template if:true={showStartBtn}>
+        <lightning-button
+          label="Start"
+          onclick={start}
+          style="margin-left: 145px"
+        ></lightning-button>
+      </template>
+      <template if:false={showStartBtn}>
+        <lightning-button
+          label="Stop"
+          onclick={stop}
+          style="margin-left: 145px"
+        ></lightning-button>
+      </template>
+
+      <lightning-button
+        label="Reset"
+        onclick={reset}
+        style="margin-left: 15px"
+      ></lightning-button>
+    </div>
+  </div>
+</template>
